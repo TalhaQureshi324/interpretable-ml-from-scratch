@@ -1,0 +1,39 @@
+Total pages: 1
+
+--- Page 1 ---
+Greedy C4.5 Tree (Suboptimal)
+Feature 12
+≤−0.77
+Class 1 (6
+samples)
+Feature
+4 ≤0.99
+Class 0 (1575
+samples)
+Class 1 (22
+samples)
+Yes
+No
+Yes
+No
+Noise feature at root
+isolates only 6 samples.
+Dominant leaf is 99%
+of data — impure.
+Accuracy ≈52%
+Globally Optimal (Conceptual)
+Oblique Split
+f1 + f2 ≤0
+Class 0
+(balanced)
+Class 1
+(balanced)
+Yes
+No
+Requires look-ahead or oblique
+(non-axis-aligned) splits.
+C4.5 cannot do this greedily.
+Accuracy ≈100%
+Key Insight: In XOR/parity problems, any single axis-aligned split is uninformative because both halves contain roughly equal numbers of
+both classes. Greedy splitting commits to a locally optimal noise feature at the root, leaving the vast majority of data in an impure leaf. A
+globally optimal tree would require evaluating split combinations or using oblique splits — both intractable for standard C4.5.

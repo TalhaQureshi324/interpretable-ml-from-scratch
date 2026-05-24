@@ -1,0 +1,287 @@
+{
+  "q1": {
+    "part_b": {
+      "friendly_silhouette": 0.8003205724282848,
+      "adversarial_silhouette": 0.11231752189820252
+    },
+    "part_c": {
+      "final_costs": [
+        7428.337200728531,
+        52406.47127712968,
+        7428.337200728531,
+        7428.337200728531,
+        7428.337200728531,
+        52408.0290696491,
+        7428.337200728532,
+        7428.337200728532,
+        52438.78777557413,
+        52222.69469675943,
+        7428.337200728532,
+        7428.337200728531,
+        52446.39668652886,
+        7428.337200728531,
+        7428.337200728531,
+        7428.337200728531,
+        7428.337200728531,
+        7428.337200728531,
+        52437.84791653455,
+        52373.045684070334
+      ],
+      "mean_cost": 23165.082835785848,
+      "std_cost": 21445.612187340997
+    }
+  },
+  "q2": {
+    "part_b": {
+      "accuracy": 0.98,
+      "precision": 0.9893048128342246,
+      "recall": 0.9685863874345549,
+      "f1": 0.9788359788359788,
+      "confusion_matrix": [
+        [
+          207,
+          2
+        ],
+        [
+          6,
+          185
+        ]
+      ]
+    },
+    "part_c": {
+      "success": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "confusion_matrix": [
+          [
+            206,
+            0
+          ],
+          [
+            0,
+            194
+          ]
+        ]
+      },
+      "failure": {
+        "accuracy": 0.54,
+        "precision": 0.5421052631578948,
+        "recall": 0.515,
+        "f1": 0.5282051282051282,
+        "confusion_matrix": [
+          [
+            113,
+            87
+          ],
+          [
+            97,
+            103
+          ]
+        ]
+      }
+    },
+    "part_d": "\n(a) Why can Naive Bayes outperform more sophisticated models on small datasets?\n\n    Naive Bayes makes a strong conditional independence assumption,\n    which dramatically reduces the number of parameters to estimate.\n    For d features and C classes:\n      - NB parameters: O(C * d)  (means + variances + priors)\n      - Full Gaussian classifier: O(C * d^2)  (covariance matrices)\n      - Logistic Regression with interactions: O(d^2) or more\n\n    With small n, high-variance models (complex models) overfit because\n    they cannot reliably estimate O(d^2) parameters. NB's high bias\n    becomes a blessing: it generalizes better despite wrong assumptions.\n    This is the classic bias-variance tradeoff.\n\n(b) Why does correlated evidence lead to overconfident predictions?\n\n    Mathematically, NB approximates the joint likelihood:\n      P(x1, x2 | y)  ~  P(x1|y) * P(x2|y)\n\n    If x1 and x2 are positively correlated, the true joint likelihood\n    is more constrained than the product of marginals. The product\n    overestimates the evidence because it double-counts the same\n    information.\n\n    In log-space:\n      log P(x1,x2|y)  vs  log P(x1|y) + log P(x2|y)\n\n    The variance of the RHS (sum of correlated log-likelihoods) is\n    larger than the variance of the true joint log-likelihood.\n    Consequently, the posterior log-odds have inflated variance,\n    pushing predictions toward 0 or 1, leading to overconfidence.\n\n    If rho is the correlation between x1 and x2 (given y), the effective\n    variance of the evidence sum is approximately:\n      Var[log P(x1|y) + log P(x2|y)] ~= sigma1^2 + sigma2^2 + 2*rho*sigma1*sigma2\n    which exceeds the true information content when rho > 0.\n    "
+  },
+  "q3": {
+    "part_b": [
+      {
+        "feature": 0,
+        "threshold": 3.2390516492602477,
+        "IG": 0.0004913959451884331,
+        "GR": 0.09307319332159283
+      },
+      {
+        "feature": 1,
+        "threshold": 2.6060569992958875,
+        "IG": 0.00394006951089243,
+        "GR": 0.12224716374848923
+      },
+      {
+        "feature": 2,
+        "threshold": 0.004803238144352845,
+        "IG": 0.3570879313599229,
+        "GR": 0.3571458994543979
+      },
+      {
+        "feature": 3,
+        "threshold": -3.4842868748217732,
+        "IG": 0.0009831089507696955,
+        "GR": 0.10108299134251843
+      },
+      {
+        "feature": 4,
+        "threshold": -3.230867417649425,
+        "IG": 0.0009831089507696955,
+        "GR": 0.10108299134251843
+      },
+      {
+        "feature": 5,
+        "threshold": -3.135851895689733,
+        "IG": 0.0004913959451884331,
+        "GR": 0.09307319332159283
+      },
+      {
+        "feature": 6,
+        "threshold": -3.05551097254025,
+        "IG": 0.001475139448766094,
+        "GR": 0.10645398759483454
+      },
+      {
+        "feature": 7,
+        "threshold": -3.6004574776663647,
+        "IG": 0.0004913959451884331,
+        "GR": 0.09307319332159283
+      },
+      {
+        "feature": 8,
+        "threshold": -2.9107879450122134,
+        "IG": 0.001475139448766094,
+        "GR": 0.10645398759483454
+      },
+      {
+        "feature": 9,
+        "threshold": 3.1737633368305542,
+        "IG": 0.0009831089507696955,
+        "GR": 0.10108299134251843
+      },
+      {
+        "feature": 10,
+        "threshold": 3.1406435498426983,
+        "IG": 0.0004913959451884331,
+        "GR": 0.09307319332159283
+      },
+      {
+        "feature": 11,
+        "threshold": 3.2908525248999654,
+        "IG": 0.0014029231879296722,
+        "GR": 0.07888747828691761
+      },
+      {
+        "feature": 12,
+        "threshold": -3.1605349625097836,
+        "IG": 0.00196748787212897,
+        "GR": 0.11063339613154108
+      },
+      {
+        "feature": 13,
+        "threshold": 3.025699997748564,
+        "IG": 0.0009831089507696955,
+        "GR": 0.10108299134251843
+      },
+      {
+        "feature": 14,
+        "threshold": -2.816198800588731,
+        "IG": 0.0003504330228892849,
+        "GR": 0.06637401225021813
+      },
+      {
+        "feature": 15,
+        "threshold": -3.1265109041754395,
+        "IG": 0.0004913959451884331,
+        "GR": 0.09307319332159283
+      },
+      {
+        "feature": 16,
+        "threshold": -2.6660798461708626,
+        "IG": 0.0021055781937987517,
+        "GR": 0.08351536546248979
+      },
+      {
+        "feature": 17,
+        "threshold": -3.3236555941732213,
+        "IG": 0.0004913959451884331,
+        "GR": 0.09307319332159283
+      },
+      {
+        "feature": 18,
+        "threshold": 3.043081296795574,
+        "IG": 0.0009831089507696955,
+        "GR": 0.10108299134251843
+      },
+      {
+        "feature": 19,
+        "threshold": 2.787693317000878,
+        "IG": 0.00196748787212897,
+        "GR": 0.11063339613154108
+      },
+      {
+        "feature": 20,
+        "threshold": 51.7828479456674,
+        "IG": 0.001475139448766094,
+        "GR": 0.10645398759483454
+      }
+    ],
+    "part_c": {
+      "depths": [
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "10",
+        "15",
+        "20",
+        "30",
+        "Unlim"
+      ],
+      "train_accs": [
+        0.6375,
+        0.7904166666666667,
+        0.8725,
+        0.8945833333333333,
+        0.8991666666666667,
+        0.9058333333333334,
+        0.9333333333333333,
+        0.9483333333333334,
+        0.9654166666666667,
+        1.0
+      ],
+      "val_accs": [
+        0.6133333333333333,
+        0.7883333333333333,
+        0.8733333333333333,
+        0.875,
+        0.8616666666666667,
+        0.8583333333333333,
+        0.86,
+        0.84,
+        0.8283333333333334,
+        0.7983333333333333
+      ],
+      "node_counts": [
+        3,
+        7,
+        13,
+        31,
+        53,
+        87,
+        173,
+        253,
+        373,
+        605
+      ]
+    },
+    "part_d": {
+      "train_acc": 0.51875,
+      "val_acc": 0.52,
+      "depth": 5,
+      "nodes": 11
+    },
+    "part_e": {
+      "clean": {
+        "train": 1.0,
+        "val": 0.995,
+        "nodes": 15,
+        "depth": 5
+      },
+      "noisy": {
+        "train": 0.8958333333333334,
+        "val": 0.8466666666666667,
+        "nodes": 75,
+        "depth": 10
+      }
+    }
+  }
+}
