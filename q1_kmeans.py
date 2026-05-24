@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from dataset_generator import get_kmeans_friendly_dataset, get_kmeans_adversarial_dataset
 from utils import savefig, plot_scatter_2d
 from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler
 
 SEED = 122
 np.random.seed(SEED)
@@ -167,6 +168,14 @@ def experiment_part_b():
     sil_bad = silhouette_score(X_adv, y_pred_bad)
     print(f"Silhouette Score (adversarial): {sil_bad:.4f}")
 
+    # Test with feature scaling
+    scaler = StandardScaler()
+    X_adv_scaled = scaler.fit_transform(X_adv)
+    kmeans_scaled = KMeans(k=2, random_state=SEED)
+    kmeans_scaled.fit(X_adv_scaled)
+    sil_bad_scaled = silhouette_score(X_adv_scaled, kmeans_scaled.labels)
+    print(f"Silhouette Score (adversarial, scaled): {sil_bad_scaled:.4f}")
+
     plt.figure(figsize=(12, 5))
 
     plt.subplot(1, 2, 1)
@@ -202,12 +211,14 @@ def experiment_part_b():
     print("Adversarial dataset: Elongated, different covariance shapes.")
     print("  -> k-Means assumes spherical clusters with equal variance.")
     print("  -> Violation leads to poor boundaries despite visual separability.")
-    print("  -> Feature scaling (StandardScaler) does NOT fix this because")
-    print("     the issue is shape/anisotropy, not scale.")
+    print(f"  -> Feature scaling (StandardScaler): silhouette {sil_bad:.4f} -> {sil_bad_scaled:.4f}")
+    print("     Scaling does NOT fix the poor clustering because the issue is")
+    print("     shape/anisotropy, not scale. The clusters remain non-spherical.")
 
     return {
         "friendly_silhouette": sil_good,
         "adversarial_silhouette": sil_bad,
+        "adversarial_silhouette_scaled": sil_bad_scaled,
     }
 
 
